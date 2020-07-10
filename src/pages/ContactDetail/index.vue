@@ -9,7 +9,7 @@
         </li>
         <li class="contact-property">
           <span>电话：</span>
-          <span>{{ getTelphones() }}</span>
+          <span>{{ contact.telphone.type }}  {{contact.telphone.mobile}}</span>
         </li>
         <li class="contact-property">
           <span>性别：</span>
@@ -29,15 +29,31 @@
       <button @click="onEdit">编辑 Contact</button>
       <button @click="toListPage">返回Contact列表</button>
     </div>
+    <Modal 
+      class="contact-modal" 
+      title="修改Contact" 
+      v-model="visible" 
+      @submit="onSubmit">
+      <ContactForm ref="form" :contact="contact"  />
+    </Modal>
   </div>
 </template>
 <script>
-import { getContactById } from "../../services/contacts";
+import Modal from "../../components/Modal"
+import ContactForm from "../ContactForm"
+import { getContactById, updateContact } from "../../services/contacts";
 import { fireEvent } from "../../utils/EventBus";
 export default {
+  components: {
+    Modal,
+    ContactForm
+  },
   data() {
     return {
-      contact: {}
+      contact: {
+        telphone: {}
+      },
+      visible: false
     };
   },
   mounted() {
@@ -49,14 +65,20 @@ export default {
     toListPage() {
       fireEvent("toPage", "list");
     },
-    onEdit() {},
-    getTelphones() {
-      const telphones = this.contact.telphones || [];
-      return telphones.map(item => `${item.type} ${item.mobile}`).join(" ");
+    onEdit() {
+      this.visible = true
     },
     getTags() {
       const tags = this.contact.tags || [];
       return tags.join(" ");
+    },
+    onSubmit(){
+      const fields = this.$refs.form.getFormFields()
+      fields.id = this.contact.id
+      updateContact(fields).then(() => {
+        getContactById(fields.id).then(response => (this.contact = response.data));
+      })
+      this.visible = false
     }
   }
 };

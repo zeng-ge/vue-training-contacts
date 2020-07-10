@@ -1,14 +1,8 @@
 <template>
   <li class="contact-item">
     <div class="contact-name">{{ contact.name }}</div>
-    <div class="contact-telphones">
-      <div
-        class="contact-telphone"
-        v-for="telphone of contact.telphones"
-        :key="telphone.mobile"
-      >
-        {{ telphone.type }} {{ telphone.mobile }}
-      </div>
+    <div class="contact-telphone">
+        {{ contact.telphone.type }} {{ contact.telphone.mobile }}
     </div>
     <div class="contact-address">{{ contact.address }}</div>
     <div class="contact-operations">
@@ -45,19 +39,16 @@ export default {
   padding: 10px;
   border-bottom: 1px solid white;
   background-color: #f3f3f3;
-  &:hover{
+  &:hover {
     background-color: #ddd;
   }
   .contact-name {
     width: 100px;
   }
-  .contact-telphones {
+  .contact-telphone {
     display: flex;
     width: 300px;
     padding: 0 10px;
-    .contact-telphone {
-      margin-right: 10px;
-    }
   }
   .contact-address {
     flex: 1;

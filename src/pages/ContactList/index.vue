@@ -4,7 +4,7 @@
     <section class="contact-form">
       <input type="text" />
       <button class="search-btn">search</button>
-      <button class="add-contact-btn">Add Contact</button>
+      <button class="add-contact-btn" @click="onShowAddModal">Add Contact</button>
     </section>
     <section>
       <ul class="contact-items">
@@ -17,19 +17,27 @@
         />
       </ul>
     </section>
+    <Modal class="contact-modal" title="添加Contact" v-model="visible" @submit="onSubmit">
+      <ContactForm ref="form" />
+    </Modal>
   </div>
 </template>
 <script>
+import Modal from "../../components/Modal";
+import ContactForm from "../ContactForm";
 import ContactItem from "./ContactItem";
-import { getContacts } from "../../services/contacts";
+import { getContacts, addContact, removeTodo } from "../../services/contacts";
 import { fireEvent } from "../../utils/EventBus";
 export default {
   components: {
+    Modal,
+    ContactForm,
     ContactItem
   },
   data() {
     return {
-      contacts: []
+      contacts: [],
+      visible: false
     };
   },
   mounted() {
@@ -45,8 +53,17 @@ export default {
       location.hash = `contactId=${contactId}`;
       fireEvent("toPage", "detail");
     },
+    onShowAddModal() {
+      this.visible = true
+    },
+    onSubmit(){
+      const fields = this.$refs.form.getFormFields()
+      fields.id = new Date().getTime()
+      addContact(fields).then(this.getContacts)
+      this.visible = false
+    },
     onDelete(contactId) {
-      console.log(contactId);
+      removeTodo(contactId).then(this.getContacts)
     }
   }
 };
