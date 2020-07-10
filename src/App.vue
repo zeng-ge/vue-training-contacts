@@ -1,31 +1,40 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view />
+  <div class="app">
+    <component :is="contactComponent"></component>
   </div>
 </template>
-<style lang="less">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+import ContactsList from "./pages/ContactList";
+import ContactDetail from "./pages/ContactDetail";
+import { addEventListener } from "./utils/EventBus";
 
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
+export default {
+  components: {
+    ContactsList,
+    ContactDetail
+  },
+  data() {
+    return {
+      contactComponent: ContactsList
+    };
+  },
+  mounted() {
+    addEventListener("toPage", page => {
+      if (page === "detail") {
+        this.toDetail();
+      } else {
+        this.toList();
+      }
+    });
+  },
+  methods: {
+    toList() {
+      this.contactComponent = ContactsList;
+    },
+    toDetail() {
+      this.contactComponent = ContactDetail;
     }
   }
-}
-</style>
+};
+</script>
+<style lang="less"></style>

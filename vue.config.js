@@ -1,6 +1,6 @@
 module.exports = {
   configureWebpack(config) {
-    // config.devtool = "cheap-eval-source-map";
+    config.devtool = "cheap-module-source-map";
     config.resolve.extensions = [".vue", ".js", ".jsx", ".json"];
     config.devServer = {
       proxy: {
