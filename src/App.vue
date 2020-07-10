@@ -43,4 +43,12 @@ export default {
   margin-left: auto;
   margin-right: auto;
 }
+ul,
+li {
+  margin: 0;
+  padding: 0;
+}
+li {
+  list-style: none;
+}
 </style>

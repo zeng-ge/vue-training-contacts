@@ -42,7 +42,8 @@ export default {
       });
     },
     toDetialPage(contactId) {
-      fireEvent("toPage", "detail", contactId);
+      location.hash = `contactId=${contactId}`
+      fireEvent("toPage", "detail");
     },
     onDelete(contactId) {
       console.log(contactId);
@@ -63,13 +64,9 @@ export default {
       flex: 1;
       height: 32px;
     }
-    .add-contact-btn {
-      margin-left: 100px;
+    button {
+      width: 100px;
     }
-  }
-  .contact-items {
-    margin: 0;
-    padding: 0;
   }
 }
 </style>
