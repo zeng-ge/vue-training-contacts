@@ -35,15 +35,11 @@
 export default {
   props: {
     contact: {
-      type: Object,
-      default(){
-        return {}
-      }
+      type: Object
     } 
   },
   data() {
-    const contact = this.$props.contact || { type: "home", mobile: "" }
-    debugger
+    const contact = this.$props.contact || { telphone: { type: "home", mobile: "" }, tags: [] }
     return {
       name: contact.name,
       telphone: { type: contact.telphone.type, mobile: contact.telphone.mobile },
