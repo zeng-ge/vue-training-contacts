@@ -1,6 +1,11 @@
 <template>
   <div class="contact-list">
     <h3 class="title">Contact List</h3>
+    <section class="contact-form">
+      <input type="text" />
+      <button class="search-btn">search</button>
+      <button class="add-contact-btn">Add Contact</button>
+    </section>
     <section>
       <ul class="contact-items">
         <ContactItem
@@ -12,7 +17,6 @@
         />
       </ul>
     </section>
-    <section></section>
   </div>
 </template>
 <script>
@@ -50,6 +54,22 @@ export default {
 .contact-list {
   .title {
     text-align: center;
+  }
+  .contact-form {
+    display: flex;
+    flex-grow: row nowrap;
+    padding-bottom: 10px;
+    input {
+      flex: 1;
+      height: 32px;
+    }
+    .add-contact-btn {
+      margin-left: 100px;
+    }
+  }
+  .contact-items {
+    margin: 0;
+    padding: 0;
   }
 }
 </style>
