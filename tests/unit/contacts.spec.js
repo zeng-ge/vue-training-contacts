@@ -10,10 +10,7 @@ beforeAll(() => {
       {
         id: 1,
         name: "youyuxi",
-        telphones: [
-          { type: "home", mobile: "15502980060" },
-          { type: "work", mobile: "234567890" }
-        ],
+        telphone: { type: "home", mobile: "15502980060" },
         gender: "男",
         tags: ["vue"],
         address: "China"
