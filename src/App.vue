@@ -37,4 +37,10 @@ export default {
   }
 };
 </script>
-<style lang="less"></style>
+<style lang="less">
+.app {
+  width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>

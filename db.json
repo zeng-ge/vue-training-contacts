@@ -1,6 +1,7 @@
 {
   "contacts": [
     {
+      "id": 1,
       "name": "懂王",
       "telphones": [
         { "type": "home", "mobile": "123456789" },
@@ -9,6 +10,16 @@
       "gender": "男",
       "tags": [],
       "address": "漂亮国"
+    },
+    {
+      "id": 2,
+      "name": "雷电法王",
+      "telphones": [
+        { "type": "home", "mobile": "123456789" }
+      ],
+      "gender": "男",
+      "tags": ["网隐"],
+      "address": "河北"
     }
   ]
 }
