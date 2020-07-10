@@ -42,7 +42,7 @@ export default {
       });
     },
     toDetialPage(contactId) {
-      location.hash = `contactId=${contactId}`
+      location.hash = `contactId=${contactId}`;
       fireEvent("toPage", "detail");
     },
     onDelete(contactId) {

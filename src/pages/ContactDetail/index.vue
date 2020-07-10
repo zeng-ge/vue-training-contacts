@@ -41,23 +41,21 @@ export default {
     };
   },
   mounted() {
-    const params = location.hash.replace("#", "").split("=")
-    const contactId = params[1]
+    const params = location.hash.replace("#", "").split("=");
+    const contactId = params[1];
     getContactById(contactId).then(response => (this.contact = response.data));
   },
   methods: {
     toListPage() {
       fireEvent("toPage", "list");
     },
-    onEdit(){
-
-    },
+    onEdit() {},
     getTelphones() {
       const telphones = this.contact.telphones || [];
       return telphones.map(item => `${item.type} ${item.mobile}`).join(" ");
     },
     getTags() {
-      const tags = this.contact.tags || []
+      const tags = this.contact.tags || [];
       return tags.join(" ");
     }
   }
@@ -73,10 +71,9 @@ export default {
     margin-left: auto;
     margin-right: auto;
   }
-  .footer{
+  .footer {
     margin-top: 20px;
     text-align: center;
   }
 }
-
 </style>
