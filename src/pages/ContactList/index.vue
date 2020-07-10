@@ -2,14 +2,14 @@
   <div class="contact-list">
     <h3 class="title">Contact List</h3>
     <section class="contact-form">
-      <input type="text" />
-      <button class="search-btn">search</button>
+      <input type="text" v-model="keyword" @keydown.enter="onSearch" />
+      <button class="search-btn" @click="onSearch">search</button>
       <button class="add-contact-btn" @click="onShowAddModal">Add Contact</button>
     </section>
     <section>
       <ul class="contact-items">
         <ContactItem
-          v-for="contact of contacts"
+          v-for="contact of filterContacts"
           :contact="contact"
           :key="contact.id"
           @viewDetail="toDetialPage"
@@ -36,12 +36,24 @@ export default {
   },
   data() {
     return {
+      keyword: '',
+      filterCondition: '',
       contacts: [],
       visible: false
     };
   },
   mounted() {
     this.getContacts();
+  },
+  computed: {
+    filterContacts(){
+      if(!this.filterCondition){
+        return this.contacts
+      }
+      return this.contacts.filter(item => {
+        return item.name.indexOf(this.filterCondition) !== -1
+      })
+    }
   },
   methods: {
     getContacts() {
@@ -52,6 +64,9 @@ export default {
     toDetialPage(contactId) {
       location.hash = `contactId=${contactId}`;
       fireEvent("toPage", "detail");
+    },
+    onSearch(){
+      this.filterCondition = this.keyword
     },
     onShowAddModal() {
       this.visible = true
