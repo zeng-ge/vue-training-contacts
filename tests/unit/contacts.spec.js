@@ -1,4 +1,4 @@
-import { render, waitFor } from "@testing-library/vue";
+import { render } from "@testing-library/vue";
 import ContactList from "../../src/pages/ContactList/index.vue";
 
 const nock = require("nock");
