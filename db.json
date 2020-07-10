@@ -1,0 +1,14 @@
+{
+  "contacts": [
+    {
+      "name": "懂王",
+      "telphones": [
+        { "type": "home", "mobile": "123456789" },
+        { "type": "work", "mobile": "234567890" }
+      ],
+      "gender": "男",
+      "tags": [],
+      "address": "漂亮国"
+    }
+  ]
+}
