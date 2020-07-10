@@ -17,7 +17,7 @@
 </template>
 <script>
 import ContactItem from "./ContactItem";
-import { getContacts } from "../../services/contacts"
+import { getContacts } from "../../services/contacts";
 import { fireEvent } from "../../utils/EventBus";
 export default {
   components: {
@@ -28,8 +28,8 @@ export default {
       contacts: []
     };
   },
-  mounted(){
-    this.getContacts()
+  mounted() {
+    this.getContacts();
   },
   methods: {
     getContacts() {
@@ -47,9 +47,9 @@ export default {
 };
 </script>
 <style lang="less">
-  .contact-list{
-    .title{
-      text-align: center;
-    }
+.contact-list {
+  .title {
+    text-align: center;
   }
+}
 </style>

@@ -45,6 +45,9 @@ export default {
   padding: 10px;
   border-bottom: 1px solid white;
   background-color: #f3f3f3;
+  &:hover{
+    background-color: #ddd;
+  }
   .contact-name {
     width: 100px;
   }
