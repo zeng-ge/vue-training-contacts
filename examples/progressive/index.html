@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>渐进式</title>
+    <script src="./js/vue.js"></script>
+  <body>
+    <div id="app">
+      <hello-world :name="name"/>
+    </div>
+    <script>
+      /**
+       * vue._render
+       * (function anonymous(
+          ) {
+            with(this){
+              return _c('div',{attrs:{"id":"app"}},[_c('hello-world',{attrs:{"name":name}})],1)
+            }
+          })
+       * 
+      */
+      Vue.component('HelloWorld', {
+        props: {
+          name: String
+        },
+        data(){
+          return {
+            desc: 'description'
+          }
+        },
+        template: `
+          <div>
+            hello {{name}}
+            
+            <div>
+              <h3>{{desc}}</h3>
+              <input v-model="desc"/>
+            </div>
+          </div>
+        `
+      })
+      const vue = new Vue({
+        el: '#app',
+        data: {
+          name: 'world'
+        }
+      })
+    </script>
+  </body>
+</html>

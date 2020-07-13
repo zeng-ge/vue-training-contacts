@@ -1,9 +1,9 @@
 <template>
   <div class="contact-list">
-    <h3 class="title">Contact List</h3>
-    <ContactForm @submit="onSubmit"/>
+    <h3 class="title">{{ "Contact List" | uppercase }}</h3>
+    <ContactForm @submit="onSubmit" />
     <section class="search-form">
-      <input type="text" v-model="keyword" @keydown.enter="onSearch" />
+      <input v-focus type="text" v-model="keyword" @keydown.enter="onSearch" />
       <button class="search-btn" @click="onSearch">search</button>
     </section>
     <section>
@@ -22,36 +22,44 @@
 <script>
 import ContactForm from "../ContactForm";
 import ContactItem from "./ContactItem";
+import focus from "../../directives/focus";
+import uppercase from "../../filters/uppercase";
 import { getContacts, addContact, removeTodo } from "../../services/contacts";
 import { fireEvent } from "../../utils/EventBus";
 export default {
+  directives: {
+    focus,
+  },
+  filters: {
+    uppercase,
+  },
   components: {
     ContactForm,
-    ContactItem
+    ContactItem,
   },
   data() {
     return {
-      keyword: '',
-      filterCondition: '',
-      contacts: []
+      keyword: "",
+      filterCondition: "",
+      contacts: [],
     };
   },
   mounted() {
     this.getContacts();
   },
   computed: {
-    filterContacts(){
-      if(!this.filterCondition){
-        return this.contacts
+    filterContacts() {
+      if (!this.filterCondition) {
+        return this.contacts;
       }
-      return this.contacts.filter(item => {
-        return item.name.indexOf(this.filterCondition) !== -1
-      })
-    }
+      return this.contacts.filter((item) => {
+        return item.name.indexOf(this.filterCondition) !== -1;
+      });
+    },
   },
   methods: {
     getContacts() {
-      getContacts().then(response => {
+      getContacts().then((response) => {
         this.contacts = response.data;
       });
     },
@@ -59,17 +67,17 @@ export default {
       location.hash = `contactId=${contactId}`;
       fireEvent("toPage", "detail");
     },
-    onSearch(){
-      this.filterCondition = this.keyword
+    onSearch() {
+      this.filterCondition = this.keyword;
     },
-    onSubmit(fields){
-      fields.id = new Date().getTime()
-      addContact(fields).then(this.getContacts)
+    onSubmit(fields) {
+      fields.id = new Date().getTime();
+      addContact(fields).then(this.getContacts);
     },
     onDelete(contactId) {
-      removeTodo(contactId).then(this.getContacts)
-    }
-  }
+      removeTodo(contactId).then(this.getContacts);
+    },
+  },
 };
 </script>
 <style lang="less">

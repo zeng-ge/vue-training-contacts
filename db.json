@@ -4,7 +4,7 @@
       "name": "懂王",
       "telphone": {
         "type": "home",
-        "mobile": 122222
+        "mobile": 12222
       },
       "gender": "男",
       "tags": [
@@ -27,50 +27,6 @@
       ],
       "address": "河北",
       "id": 2
-    },
-    {
-      "name": "asdfasdf",
-      "telphone": {
-        "type": "home",
-        "mobile": 123123123
-      },
-      "gender": "男",
-      "tags": [
-        "帅",
-        "高"
-      ],
-      "address": "fasdfasdf",
-      "id": 1594372517596
-    },
-    {
-      "name": "asdfasd",
-      "telphone": {
-        "type": "work",
-        "mobile": 12312
-      },
-      "gender": "男",
-      "tags": [],
-      "id": 1594606011181
-    },
-    {
-      "name": "asdfasd",
-      "telphone": {
-        "type": "work",
-        "mobile": 12312
-      },
-      "gender": "男",
-      "tags": [],
-      "id": 1594606013656
-    },
-    {
-      "name": "123",
-      "telphone": {
-        "type": "home",
-        "mobile": 123
-      },
-      "gender": "男",
-      "tags": [],
-      "id": 1594606322460
     }
   ]
 }
