@@ -4,7 +4,7 @@
   "prettier.singleQuote": false,
   "terminal.integrated.fontSize": 14,
   "explorer.confirmDelete": false,
-  "prettier.eslintIntegration": false,
+  "prettier.eslintIntegration": true,
   "editor.tabSize": 2,
   "[json]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -13,13 +13,5 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "javascript.updateImportsOnFileMove.enabled": "always",
-  "editor.formatOnSave": true,
-  "editor.codeActionsOnSave": {
-    // For ESLint
-    "source.fixAll.eslint": true,
-    // For TSLint
-    "source.fixAll.tslint": true,
-    // For Stylelint
-    "source.fixAll.stylelint": true
-  }
+  "editor.formatOnSave": true
 }

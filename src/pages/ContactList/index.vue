@@ -20,11 +20,11 @@
   </div>
 </template>
 <script>
+import { mapGetters, mapActions, mapState } from "vuex";
 import ContactForm from "../ContactForm";
 import ContactItem from "./ContactItem";
 import focus from "../../directives/focus";
 import uppercase from "../../filters/uppercase";
-import { getContacts, addContact, removeTodo } from "../../services/contacts";
 import { fireEvent } from "../../utils/EventBus";
 export default {
   directives: {
@@ -40,42 +40,43 @@ export default {
   data() {
     return {
       keyword: "",
-      filterCondition: "",
-      contacts: [],
     };
   },
   mounted() {
     this.getContacts();
   },
   computed: {
-    filterContacts() {
-      if (!this.filterCondition) {
-        return this.contacts;
-      }
-      return this.contacts.filter((item) => {
-        return item.name.indexOf(this.filterCondition) !== -1;
-      });
-    },
+    ...mapGetters("contact", ["filterContacts"]),
+    ...mapState("contact", {
+      filterCondition: (state) => state.keyword,
+    }),
   },
   methods: {
-    getContacts() {
-      getContacts().then((response) => {
-        this.contacts = response.data;
-      });
-    },
+    ...mapActions("contact", [
+      "getContacts",
+      "addContact",
+      "removeContact",
+      "updateKeyword",
+    ]),
+    // getContacts() {
+    //   this.$store.dispatch("contact/getContacts");
+    // },
     toDetialPage(contactId) {
       location.hash = `contactId=${contactId}`;
       fireEvent("toPage", "detail");
     },
     onSearch() {
-      this.filterCondition = this.keyword;
+      this.updateKeyword(this.keyword);
+      // this.$store.dispatch("contact/updateKeyword", this.keyword);
     },
     onSubmit(fields) {
       fields.id = new Date().getTime();
-      addContact(fields).then(this.getContacts);
+      this.addContact(fields);
+      // this.$store.dispatch("contact/addContact", fields);
     },
     onDelete(contactId) {
-      removeTodo(contactId).then(this.getContacts);
+      this.removeContact(contactId);
+      // this.$store.dispatch("contact/removeContact", contactId);
     },
   },
 };
