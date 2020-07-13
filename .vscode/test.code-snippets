@@ -58,5 +58,43 @@
       "});"
     ],
     "description": "@testing-library/vue"
+  },
+
+  "vue router": {
+    "prefix": "v-router",
+    "scope": "javascript",
+    "body": [
+      "import Vue from \"vue\";",
+      "import VueRouter from \"vue-router\";",
+      "",
+      "Vue.use(VueRouter);",
+      "",
+      "const routes = [",
+      "  {",
+      "    path: \"/contacts\",",
+      "    component: ",
+      "  },",
+      "  {",
+      "    path: \"*\",",
+      "    redirect: \"/contacts\"",
+      "  }",
+      "];",
+      "",
+      "const router = new VueRouter({",
+      "  mode: \"history\",",
+      "  base: process.env.BASE_URL,",
+      "  routes",
+      "});",
+      "",
+      "export default router;"
+    ],
+    "description": "vue-router"
+  },
+
+  "data-testid": {
+    "prefix": "t-data-testid",
+    "scope": "",
+    "body": [" data-testid=\"$0\""],
+    "description": "data-testid"
   }
 }
