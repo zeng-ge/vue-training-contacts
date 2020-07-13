@@ -22,15 +22,19 @@ describe("contact list", () => {
     nameInput().type("懂王");
 
     let oldAddress = "";
-    addressInput().then((textarea) => {
-      oldAddress = textarea.val();
-    });
+    addressInput()
+      .invoke("val")
+      .then((address) => {
+        console.error(address);
+        oldAddress = address;
+      });
 
-    addressInput().type(1);
-
-    addressInput().then((textarea) => {
-      cy.wrap(oldAddress + "1").should("eq", textarea.val());
-    });
+    addressInput()
+      .type(1)
+      .invoke("val")
+      .then((address) => {
+        cy.wrap(oldAddress + "1").should("eq", address);
+      });
 
     cy.get("button[data-testid=create-contact]").click();
 
