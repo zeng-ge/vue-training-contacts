@@ -18,5 +18,5 @@ export default new Vuex.Store({
   modules: {
     contact,
   },
-  plugins: [Logger],
+  plugins: process.env.NODE_ENV === "development" ? [Logger] : [],
 });
