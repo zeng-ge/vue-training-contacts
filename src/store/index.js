@@ -4,7 +4,7 @@ import contact from "./contact";
 
 Vue.use(Vuex);
 
-const Logger = (store) => {
+const Logger = store => {
   store.subscribeAction((action, state) => {
     console.log(action, state);
   });

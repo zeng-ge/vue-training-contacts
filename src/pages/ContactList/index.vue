@@ -28,18 +28,18 @@ import uppercase from "../../filters/uppercase";
 import { fireEvent } from "../../utils/EventBus";
 export default {
   directives: {
-    focus,
+    focus
   },
   filters: {
-    uppercase,
+    uppercase
   },
   components: {
     ContactForm,
-    ContactItem,
+    ContactItem
   },
   data() {
     return {
-      keyword: "",
+      keyword: ""
     };
   },
   mounted() {
@@ -48,15 +48,15 @@ export default {
   computed: {
     ...mapGetters("contact", ["filterContacts"]),
     ...mapState("contact", {
-      filterCondition: (state) => state.keyword,
-    }),
+      filterCondition: state => state.keyword
+    })
   },
   methods: {
     ...mapActions("contact", [
       "getContacts",
       "addContact",
       "removeContact",
-      "updateKeyword",
+      "updateKeyword"
     ]),
     // getContacts() {
     //   this.$store.dispatch("contact/getContacts");
@@ -77,8 +77,8 @@ export default {
     onDelete(contactId) {
       this.removeContact(contactId);
       // this.$store.dispatch("contact/removeContact", contactId);
-    },
-  },
+    }
+  }
 };
 </script>
 <style lang="less">

@@ -1,5 +1,6 @@
 import { render, fireEvent } from "@testing-library/vue";
 import ContactList from "../../src/pages/ContactList/index.vue";
+import store from '../../src/store/index.js'
 
 const nock = require("nock");
 
@@ -19,7 +20,11 @@ beforeEach(() => {
 });
 
 it("should load contacts and display them", async done => {
-  const { findByText, getByText } = render(ContactList);
+  const { findByText, getByText } = render(ContactList, {}, () => {
+    return {
+      store
+    };
+  });
   // debug();
   await findByText("youyuxi");
   // debug();
@@ -49,7 +54,11 @@ it("should fill contact form and create new contact", async done => {
       return [201, requestBody];
     });
 
-  const { findByText, getByTestId, getByText } = render(ContactList);
+  const { findByText, getByTestId, getByText } = render(ContactList, {}, () => {
+    return {
+      store
+    };
+  });
   await fireEvent.update(getByTestId("name"), formValues.name);
   await fireEvent.update(getByTestId("address"), formValues.address);
   await fireEvent.update(
