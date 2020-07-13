@@ -1,10 +1,10 @@
 <template>
   <div class="contact-list">
     <h3 class="title">Contact List</h3>
-    <section class="contact-form">
+    <ContactForm @submit="onSubmit"/>
+    <section class="search-form">
       <input type="text" v-model="keyword" @keydown.enter="onSearch" />
       <button class="search-btn" @click="onSearch">search</button>
-      <button class="add-contact-btn" @click="onShowAddModal">Add Contact</button>
     </section>
     <section>
       <ul class="contact-items">
@@ -17,20 +17,15 @@
         />
       </ul>
     </section>
-    <Modal class="contact-modal" title="添加Contact" v-model="visible" @submit="onSubmit">
-      <ContactForm ref="form" />
-    </Modal>
   </div>
 </template>
 <script>
-import Modal from "../../components/Modal";
 import ContactForm from "../ContactForm";
 import ContactItem from "./ContactItem";
 import { getContacts, addContact, removeTodo } from "../../services/contacts";
 import { fireEvent } from "../../utils/EventBus";
 export default {
   components: {
-    Modal,
     ContactForm,
     ContactItem
   },
@@ -38,8 +33,7 @@ export default {
     return {
       keyword: '',
       filterCondition: '',
-      contacts: [],
-      visible: false
+      contacts: []
     };
   },
   mounted() {
@@ -68,14 +62,9 @@ export default {
     onSearch(){
       this.filterCondition = this.keyword
     },
-    onShowAddModal() {
-      this.visible = true
-    },
-    onSubmit(){
-      const fields = this.$refs.form.getFormFields()
+    onSubmit(fields){
       fields.id = new Date().getTime()
       addContact(fields).then(this.getContacts)
-      this.visible = false
     },
     onDelete(contactId) {
       removeTodo(contactId).then(this.getContacts)
@@ -88,7 +77,7 @@ export default {
   .title {
     text-align: center;
   }
-  .contact-form {
+  .search-form {
     display: flex;
     flex-grow: row nowrap;
     padding-bottom: 10px;

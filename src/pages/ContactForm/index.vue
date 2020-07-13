@@ -1,11 +1,12 @@
 <template>
   <div class="contact-form">
+    <h3>Contact Form</h3>
     <div class="form-control">
-      <label>姓名</label>
+      <span class="label">姓名</span>
       <input type="text" v-model="name" />
     </div>
     <div class="form-control">
-      <label>电话</label>
+      <span class="label">电话</span>
       <div style="display: inline-block;">
         <select v-model="telphone.type">
           <option value="home">home</option>
@@ -15,19 +16,29 @@
       </div>
     </div>
     <div class="form-control">
-      <label>性别</label>
-      <input type="radio" v-model="gender" value="男" />男
-      <input type="radio" v-model="gender" value="女" />女
+      <span class="label">性别</span>
+      <label>
+        <input type="radio" v-model="gender" value="男" />
+        <span>男</span>
+      </label>
+      <label>
+        <input type="radio" v-model="gender" value="女" />
+        <span>女</span>
+      </label>
+      
     </div>
     <div class="form-control">
-      <label>标签</label>
-      <input type="checkbox" v-model="tags" value="高" />高
-      <input type="checkbox" v-model="tags" value="帅" />帅
-      <input type="checkbox" v-model="tags" value="富" />富
+      <span class="label">标签</span>
+      <label><input type="checkbox" v-model="tags" value="中介" />中介</label>
+      <label><input type="checkbox" v-model="tags" value="外卖" />外卖</label>
+      <label><input type="checkbox" v-model="tags" value="诈骗" />诈骗</label>
     </div>
     <div class="form-control">
-      <label>地址</label>
+      <span class="label" style="vertical-align: top;">地址</span>
       <textarea v-model="address"></textarea>
+    </div>
+    <div class="form-control">
+      <button @click="onSubmit">{{ editMode ? '修改Contact' : '添加Contact'}}</button>
     </div>
   </div>
 </template>
@@ -39,16 +50,38 @@ export default {
     } 
   },
   data() {
-    const contact = this.$props.contact || { telphone: { type: "home", mobile: "" }, tags: [] }
+    const contact = this.$props.contact || this.getDefaultFields()
     return {
       name: contact.name,
       telphone: { type: contact.telphone.type, mobile: contact.telphone.mobile },
       gender: contact.gender,
       tags: contact.tags,
-      address: contact.address
+      address: contact.address,
+      editMode: !!this.$props.contact
     };
   },
   methods: {
+    getDefaultFields(){
+      return { 
+        telphone: { type: "home", mobile: "" }, tags: [], gender: '男'
+      }
+    },
+    resetFields() {
+      this.name = ''
+      this.telphone = { type: "home", mobile: "" }
+      this.tags = []
+      this.address = ''
+    },
+    onSubmit() {
+      const { submit } = this.$listeners
+      const fields = this.getFormFields()
+      if(!fields.name || !fields.telphone.mobile) {
+        alert('please type name or phone')
+        return
+      }
+      submit && submit(this.getFormFields())
+      this.resetFields()
+    },
     getFormFields(){
       return {
         name: this.name,
@@ -64,14 +97,17 @@ export default {
 <style lang="less">
   .contact-form{
     .form-control{
+      display: inline-block;
+      width: 400px;
       margin-bottom: 10px;
-      label{
+      vertical-align: top;
+      .label{
         display: inline-block;
-        width: 80px;
+        width: 60px;
         line-height: 32px;
         height: 32px;
       }
-      input, select{
+      input[type=text], input[type=number], select{
         box-sizing: border-box;
         line-height: 30px;
         height: 32px;

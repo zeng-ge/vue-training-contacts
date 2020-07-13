@@ -1,12 +1,13 @@
 <template>
-  <div class="modal-wrap" v-if="visible">
+  <div class="modal-wrap" v-if="visible" 
+    :style="{width: width + 'px', height: height + 'px'}">
     <header>
       <span>{{title}}</span>
     </header>
     <div class="body">
       <slot></slot>
     </div>
-    <footer>
+    <footer v-if="footer">
       <slot name="footer">
         <button @click="onSubmit">submit</button>
         <button @click="onCancel">cancel</button>
@@ -22,7 +23,10 @@ export default {
   },
   props: {
     visible: Boolean,
-    title: String
+    title: String,
+    footer: Boolean,
+    width: String,
+    height: String
   },
   mounted() {
     this.modalContainer = document.createElement('div')

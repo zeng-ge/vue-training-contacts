@@ -31,10 +31,11 @@
     </div>
     <Modal 
       class="contact-modal" 
+      width="1000"
+      height="300"
       title="修改Contact" 
-      v-model="visible" 
-      @submit="onSubmit">
-      <ContactForm ref="form" :contact="contact"  />
+      v-model="visible">
+      <ContactForm ref="form" :contact="contact" @submit="onSubmit"  />
     </Modal>
   </div>
 </template>
