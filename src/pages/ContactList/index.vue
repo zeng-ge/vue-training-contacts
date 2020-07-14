@@ -61,10 +61,6 @@ export default {
     //   this.$store.dispatch("contact/getContacts");
     // },
 
-    // toDetialPage(contactId) {
-    //   location.hash = `contactId=${contactId}`;
-    //   fireEvent("toPage", "detail");
-    // },
     onSearch() {
       this.updateKeyword(this.keyword);
       // this.$store.dispatch("contact/updateKeyword", this.keyword);

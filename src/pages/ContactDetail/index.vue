@@ -3,9 +3,9 @@
     <h3 class="title">contact-detail</h3>
     <section>
       <ul>
-        <li class="contact-property" data-testid="contact-name">
+        <li class="contact-property">
           <span>姓名：</span>
-          <span>{{ contact.name }}</span>
+          <span :data-testid="`contact-name-${contact.id}`">{{ contact.name }}</span>
         </li>
         <li class="contact-property">
           <span>电话：</span>
