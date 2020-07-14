@@ -1,34 +1,64 @@
 import { render, fireEvent } from "@testing-library/vue";
 import ContactList from "../../src/pages/ContactList/index.vue";
+import App from "../../src/App.vue";
 import store from "../../src/store/index.js";
+import { routes } from "../../src/router/index.js";
 
 const nock = require("nock");
 
+const mockData = {
+  id: 1,
+  name: "youyuxi",
+  telphone: { type: "home", mobile: "15502980060" },
+  gender: "男",
+  tags: ["vue"],
+  address: "China"
+};
 beforeEach(() => {
   nock("http://api.contacts.cn")
     .get("/api/contacts")
-    .reply(200, [
-      {
-        id: 1,
-        name: "youyuxi",
-        telphone: { type: "home", mobile: "15502980060" },
-        gender: "男",
-        tags: ["vue"],
-        address: "China"
-      }
-    ]);
+    .reply(200, [mockData]);
 });
 
 it("should load contacts and display them", async done => {
-  const { findByText, getByText } = render(ContactList, {}, () => {
-    return {
-      store
-    };
-  });
+  const { findByText, getByText } = render(
+    ContactList,
+    {
+      routes: routes
+    },
+    () => {
+      return {
+        store
+      };
+    }
+  );
   // debug();
   await findByText("youyuxi");
   // debug();
   expect(getByText("home 15502980060")).not.toBeNull();
+  done();
+});
+
+it("should goto detail page", async done => {
+  nock("http://api.contacts.cn")
+    .get("/api/contacts/1")
+    .reply(200, [mockData]);
+
+  const { getByTestId } = render(
+    App,
+    {
+      routes
+    },
+    () => {
+      return {
+        store
+      };
+    }
+  );
+  await getByTestId("detail-link-1");
+  await fireEvent.click(getByTestId("detail-link-1"));
+  await getByTestId("contact-name");
+  expect(getByTestId("contact-name")).not.toBeNull();
   done();
 });
 
@@ -54,11 +84,18 @@ it("should fill contact form and create new contact", async done => {
       return [201, requestBody];
     });
 
-  const { findByText, getByTestId, getByText } = render(ContactList, {}, () => {
-    return {
-      store
-    };
-  });
+  const { findByText, getByTestId, getByText } = render(
+    ContactList,
+    {
+      routes: routes
+    },
+    () => {
+      return {
+        store
+      };
+    }
+  );
+
   await fireEvent.update(getByTestId("name"), formValues.name);
   await fireEvent.update(getByTestId("address"), formValues.address);
   await fireEvent.update(

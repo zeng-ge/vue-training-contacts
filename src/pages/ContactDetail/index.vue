@@ -3,7 +3,7 @@
     <h3 class="title">contact-detail</h3>
     <section>
       <ul>
-        <li class="contact-property">
+        <li class="contact-property" data-testid="contact-name">
           <span>姓名：</span>
           <span>{{ contact.name }}</span>
         </li>

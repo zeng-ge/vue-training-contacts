@@ -5,7 +5,7 @@ import ContactDetail from "../pages/ContactDetail";
 
 Vue.use(VueRouter);
 
-const routes = [
+export const routes = [
   {
     path: "/contacts",
     component: Contacts

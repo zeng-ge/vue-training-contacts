@@ -5,7 +5,7 @@
     <div class="contact-address">{{ contact.address }}</div>
     <div class="contact-operations">
       <!-- <router-link :to="`/contacts/${contact.id}`">详情</router-link> -->
-      <button @click="toDetail">详情</button>
+      <button @click="toDetail" :data-testid="`detail-link-${contact.id}`">详情</button>
       <button @click="onDelete">删除</button>
     </div>
   </li>
