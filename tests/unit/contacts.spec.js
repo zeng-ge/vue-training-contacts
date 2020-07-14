@@ -1,6 +1,6 @@
 import { render, fireEvent } from "@testing-library/vue";
 import ContactList from "../../src/pages/ContactList/index.vue";
-import store from '../../src/store/index.js'
+import store from "../../src/store/index.js";
 
 const nock = require("nock");
 
@@ -70,11 +70,11 @@ it("should fill contact form and create new contact", async done => {
     formValues.telphone.type
   );
 
-  fireEvent.click(getByTestId("gender.female"), formValues.gender);
-  fireEvent.click(getByTestId("tags.agent"));
-  fireEvent.click(getByTestId("tags.takeout"));
+  await fireEvent.click(getByTestId("gender.female"), formValues.gender);
+  await fireEvent.click(getByTestId("tags.agent"));
+  await fireEvent.click(getByTestId("tags.takeout"));
 
-  fireEvent.click(getByTestId("create-contact"));
+  await fireEvent.click(getByTestId("create-contact"));
   await findByText("dyw"); // wait for the `/api/contacts` api request
   expect(getByText("work 15502980080")).not.toBeNull();
   done();
