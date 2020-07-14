@@ -28,47 +28,41 @@
     <div class="footer">
       <button @click="onEdit">编辑 Contact</button>
       <button @click="toListPage">返回Contact列表</button>
+      <!-- <router-link :to="'/contacts'">返回Contact列表</router-link> -->
     </div>
-    <Modal
-      class="contact-modal"
-      width="1000"
-      height="300"
-      title="修改Contact"
-      v-model="visible"
-    >
+    <Modal class="contact-modal" width="1000" height="300" title="修改Contact" v-model="visible">
       <ContactForm ref="form" :contact="contact" @submit="onSubmit" />
     </Modal>
   </div>
 </template>
+
 <script>
 import { mapState, mapActions } from "vuex";
 import Modal from "../../components/Modal";
 import ContactForm from "../ContactForm";
-import { fireEvent } from "../../utils/EventBus";
+
 export default {
   components: {
     Modal,
-    ContactForm,
+    ContactForm
   },
   data() {
     return {
-      visible: false,
+      visible: false
     };
   },
   computed: {
     ...mapState("contact", {
-      contact: "contactDetail",
-    }),
+      contact: "contactDetail"
+    })
   },
   mounted() {
-    const params = location.hash.replace("#", "").split("=");
-    const contactId = params[1];
-    this.getContactById(contactId);
+    this.getContactById(this.$route.params.id);
   },
   methods: {
     ...mapActions("contact", ["getContactById", "updateContact"]),
     toListPage() {
-      fireEvent("toPage", "list");
+      this.$router.push("/contacts");
     },
     onEdit() {
       this.visible = true;
@@ -82,8 +76,8 @@ export default {
       fields.id = this.contact.id;
       this.updateContact(fields);
       this.visible = false;
-    },
-  },
+    }
+  }
 };
 </script>
 <style lang="less">

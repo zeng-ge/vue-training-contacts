@@ -12,7 +12,6 @@
           v-for="contact of filterContacts"
           :contact="contact"
           :key="contact.id"
-          @viewDetail="toDetialPage"
           @deleteContact="onDelete"
         />
       </ul>
@@ -25,7 +24,7 @@ import ContactForm from "../ContactForm";
 import ContactItem from "./ContactItem";
 import focus from "../../directives/focus";
 import uppercase from "../../filters/uppercase";
-import { fireEvent } from "../../utils/EventBus";
+
 export default {
   directives: {
     focus
@@ -61,10 +60,11 @@ export default {
     // getContacts() {
     //   this.$store.dispatch("contact/getContacts");
     // },
-    toDetialPage(contactId) {
-      location.hash = `contactId=${contactId}`;
-      fireEvent("toPage", "detail");
-    },
+
+    // toDetialPage(contactId) {
+    //   location.hash = `contactId=${contactId}`;
+    //   fireEvent("toPage", "detail");
+    // },
     onSearch() {
       this.updateKeyword(this.keyword);
       // this.$store.dispatch("contact/updateKeyword", this.keyword);
