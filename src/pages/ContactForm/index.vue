@@ -12,41 +12,73 @@
           <option value="home">home</option>
           <option value="work">work</option>
         </select>
-        <input v-model.number="telphone.mobile" type="number" data-testid="telphone.mobile" />
+        <input
+          v-model.number="telphone.mobile"
+          type="number"
+          data-testid="telphone.mobile"
+        />
       </div>
     </div>
     <div class="form-control">
       <span class="label">性别</span>
       <label>
-        <input type="radio" v-model="gender" value="男" data-testid="gender.male" />
+        <input
+          type="radio"
+          v-model="gender"
+          value="男"
+          data-testid="gender.male"
+        />
         <span>男</span>
       </label>
       <label>
-        <input type="radio" v-model="gender" value="女" data-testid="gender.female" />
+        <input
+          type="radio"
+          v-model="gender"
+          value="女"
+          data-testid="gender.female"
+        />
         <span>女</span>
       </label>
     </div>
     <div class="form-control">
       <span class="label">标签</span>
       <label>
-        <input type="checkbox" v-model="tags" value="中介" data-testid="tags.agent" />中介
+        <input
+          type="checkbox"
+          v-model="tags"
+          value="中介"
+          data-testid="tags.agent"
+        />中介
       </label>
       <label>
-        <input type="checkbox" v-model="tags" value="外卖" data-testid="tags.takeout" />外卖
+        <input
+          type="checkbox"
+          v-model="tags"
+          value="外卖"
+          data-testid="tags.takeout"
+        />外卖
       </label>
       <label>
-        <input type="checkbox" v-model="tags" value="诈骗" data-testid="tags.cheat" />诈骗
+        <input
+          type="checkbox"
+          v-model="tags"
+          value="诈骗"
+          data-testid="tags.cheat"
+        />诈骗
       </label>
     </div>
     <div class="form-control">
       <span class="label" style="vertical-align: top;">地址</span>
-      <textarea v-model="address" name="address" data-testid="address"></textarea>
+      <textarea
+        v-model="address"
+        name="address"
+        data-testid="address"
+      ></textarea>
     </div>
     <div class="form-control">
-      <button
-        @click="onSubmit"
-        data-testid="create-contact"
-      >{{ editMode ? '修改Contact' : '添加Contact'}}</button>
+      <button @click="onSubmit" data-testid="create-contact">
+        {{ editMode ? '修改Contact' : '添加Contact' }}
+      </button>
     </div>
   </div>
 </template>
@@ -58,7 +90,7 @@ export default {
     }
   },
   data() {
-    const contact = this.$props.contact || this.getDefaultFields();
+    const contact = this.$props.contact || this.getDefaultFields()
     return {
       name: contact.name,
       telphone: {
@@ -69,31 +101,31 @@ export default {
       tags: contact.tags,
       address: contact.address,
       editMode: !!this.$props.contact
-    };
+    }
   },
   methods: {
     getDefaultFields() {
       return {
-        telphone: { type: "home", mobile: "" },
+        telphone: { type: 'home', mobile: '' },
         tags: [],
-        gender: "男"
-      };
+        gender: '男'
+      }
     },
     resetFields() {
-      this.name = "";
-      this.telphone = { type: "home", mobile: "" };
-      this.tags = [];
-      this.address = "";
+      this.name = ''
+      this.telphone = { type: 'home', mobile: '' }
+      this.tags = []
+      this.address = ''
     },
     onSubmit() {
-      const { submit } = this.$listeners;
-      const fields = this.getFormFields();
+      const { submit } = this.$listeners
+      const fields = this.getFormFields()
       if (!fields.name || !fields.telphone.mobile) {
-        alert("please type name or phone");
-        return;
+        alert('please type name or phone')
+        return
       }
-      submit && submit(this.getFormFields());
-      this.resetFields();
+      submit && submit(this.getFormFields())
+      this.resetFields()
     },
     getFormFields() {
       return {
@@ -102,10 +134,10 @@ export default {
         gender: this.gender,
         tags: this.tags,
         address: this.address
-      };
+      }
     }
   }
-};
+}
 </script>
 <style lang="less">
 .contact-form {
@@ -120,8 +152,8 @@ export default {
       line-height: 32px;
       height: 32px;
     }
-    input[type="text"],
-    input[type="number"],
+    input[type='text'],
+    input[type='number'],
     select {
       box-sizing: border-box;
       line-height: 30px;

@@ -1,12 +1,12 @@
-const focus = (el) => {
-  el.focus();
-};
+const focus = el => {
+  el.focus()
+}
 export default {
   bind() {},
   inserted(el) {
-    focus(el);
+    focus(el)
   },
   updated() {},
   componentUpdated() {},
-  unbind() {},
-};
+  unbind() {}
+}

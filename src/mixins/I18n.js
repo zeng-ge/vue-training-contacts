@@ -1,10 +1,10 @@
 class I18n {
-  t(text){
+  t(text) {
     return text
   }
 }
 export default {
-  created(){
+  created() {
     this.$i18n = new I18n()
   },
   methods: {

@@ -1,14 +1,14 @@
-import Vue from "vue";
-import Vuex from "vuex";
-import contact from "./contact";
+import Vue from 'vue'
+import Vuex from 'vuex'
+import contact from './contact'
 
-Vue.use(Vuex);
+Vue.use(Vuex)
 
 const Logger = store => {
   store.subscribeAction((action, state) => {
-    console.log(action, state);
-  });
-};
+    console.log(action, state)
+  })
+}
 
 export default new Vuex.Store({
   strict: true,
@@ -16,7 +16,7 @@ export default new Vuex.Store({
   mutations: {},
   actions: {},
   modules: {
-    contact,
+    contact
   },
-  plugins: process.env.NODE_ENV === "development" ? [Logger] : [],
-});
+  plugins: process.env.NODE_ENV === 'development' ? [Logger] : []
+})

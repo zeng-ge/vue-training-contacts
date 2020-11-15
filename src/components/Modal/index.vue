@@ -1,8 +1,11 @@
 <template>
-  <div class="modal-wrap" v-if="visible" 
-    :style="{width: width + 'px', height: height + 'px'}">
+  <div
+    class="modal-wrap"
+    v-if="visible"
+    :style="{ width: width + 'px', height: height + 'px' }"
+  >
     <header>
-      <span>{{title}}</span>
+      <span>{{ title }}</span>
     </header>
     <div class="body">
       <slot></slot>
@@ -51,36 +54,37 @@ export default {
 }
 </script>
 <style lang="less">
-  .modal-wrap{
-    display: flex;
-    position: fixed;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    align-items: stretch;
-    width: 600px;
-    height: 400px;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    margin: auto;
-    background-color: #fff;
-    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
-    header, footer{
-      padding: 10px;
-    }
-    .body{
-      padding: 0 10px;
-    }
-    footer{
-      text-align: right;
-      button{
-        font-size: 16px;
-        margin-left: 10px;
-      }
-    }
-    .body{
-      flex: 1;
+.modal-wrap {
+  display: flex;
+  position: fixed;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  width: 600px;
+  height: 400px;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  background-color: #fff;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+  header,
+  footer {
+    padding: 10px;
+  }
+  .body {
+    padding: 0 10px;
+  }
+  footer {
+    text-align: right;
+    button {
+      font-size: 16px;
+      margin-left: 10px;
     }
   }
+  .body {
+    flex: 1;
+  }
+}
 </style>

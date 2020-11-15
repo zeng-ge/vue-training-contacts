@@ -5,7 +5,9 @@
       <ul>
         <li class="contact-property">
           <span>姓名：</span>
-          <span :data-testid="`contact-name-${contact.id}`">{{ contact.name }}</span>
+          <span :data-testid="`contact-name-${contact.id}`">{{
+            contact.name
+          }}</span>
         </li>
         <li class="contact-property">
           <span>电话：</span>
@@ -30,16 +32,22 @@
       <button @click="toListPage">返回Contact列表</button>
       <!-- <router-link :to="'/contacts'">返回Contact列表</router-link> -->
     </div>
-    <Modal class="contact-modal" width="1000" height="300" title="修改Contact" v-model="visible">
+    <Modal
+      class="contact-modal"
+      width="1000"
+      height="300"
+      title="修改Contact"
+      v-model="visible"
+    >
       <ContactForm ref="form" :contact="contact" @submit="onSubmit" />
     </Modal>
   </div>
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
-import Modal from "../../components/Modal";
-import ContactForm from "../ContactForm";
+import { mapState, mapActions } from 'vuex'
+import Modal from '../../components/Modal'
+import ContactForm from '../ContactForm'
 
 export default {
   components: {
@@ -49,36 +57,36 @@ export default {
   data() {
     return {
       visible: false
-    };
+    }
   },
   computed: {
-    ...mapState("contact", {
-      contact: "contactDetail"
+    ...mapState('contact', {
+      contact: 'contactDetail'
     })
   },
   mounted() {
-    this.getContactById(this.$route.params.id);
+    this.getContactById(this.$route.params.id)
   },
   methods: {
-    ...mapActions("contact", ["getContactById", "updateContact"]),
+    ...mapActions('contact', ['getContactById', 'updateContact']),
     toListPage() {
-      this.$router.push("/contacts");
+      this.$router.push('/contacts')
     },
     onEdit() {
-      this.visible = true;
+      this.visible = true
     },
     getTags() {
-      const tags = this.contact.tags || [];
-      return tags.join(" ");
+      const tags = this.contact.tags || []
+      return tags.join(' ')
     },
     onSubmit() {
-      const fields = this.$refs.form.getFormFields();
-      fields.id = this.contact.id;
-      this.updateContact(fields);
-      this.visible = false;
+      const fields = this.$refs.form.getFormFields()
+      fields.id = this.contact.id
+      this.updateContact(fields)
+      this.visible = false
     }
   }
-};
+}
 </script>
 <style lang="less">
 .contact-detail {

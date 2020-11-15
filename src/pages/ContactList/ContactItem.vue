@@ -1,11 +1,15 @@
 <template>
   <li class="contact-item">
     <div class="contact-name">{{ contact.name }}</div>
-    <div class="contact-telphone">{{ contact.telphone.type }} {{ contact.telphone.mobile }}</div>
+    <div class="contact-telphone">
+      {{ contact.telphone.type }} {{ contact.telphone.mobile }}
+    </div>
     <div class="contact-address">{{ contact.address }}</div>
     <div class="contact-operations">
       <!-- <router-link :to="`/contacts/${contact.id}`">详情</router-link> -->
-      <button @click="toDetail" :data-testid="`detail-link-${contact.id}`">详情</button>
+      <button @click="toDetail" :data-testid="`detail-link-${contact.id}`">
+        详情
+      </button>
       <button @click="onDelete">删除</button>
     </div>
   </li>
@@ -18,14 +22,14 @@ export default {
   },
   methods: {
     toDetail() {
-      this.$router.push(`/contacts/${this.contact.id}`);
+      this.$router.push(`/contacts/${this.contact.id}`)
     },
     onDelete() {
-      const { deleteContact } = this.$listeners;
-      deleteContact && deleteContact(this.contact.id);
+      const { deleteContact } = this.$listeners
+      deleteContact && deleteContact(this.contact.id)
     }
   }
-};
+}
 </script>
 <style lang="less">
 .contact-item {

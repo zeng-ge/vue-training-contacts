@@ -1,3 +1,3 @@
 export default function(text) {
-  return text.toUpperCase();
+  return text.toUpperCase()
 }

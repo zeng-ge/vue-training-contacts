@@ -1,4 +1,4 @@
-import axios from "axios";
-axios.defaults.adapter = require("axios/lib/adapters/http");
+import axios from 'axios'
+axios.defaults.adapter = require('axios/lib/adapters/http')
 
-axios.defaults.baseURL = "http://api.contacts.cn";
+axios.defaults.baseURL = 'http://api.contacts.cn'
