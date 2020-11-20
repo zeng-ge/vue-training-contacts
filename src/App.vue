@@ -2,7 +2,7 @@
   <div class="app">
     
     <router-view></router-view>
-    <!-- <Example /> -->
+    <Example v-if="false" />
   </div>
 </template>
 <script>
