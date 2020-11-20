@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "cypress open",
-    "test:e2e": "cypress run --reporter json --spec cypress/integration/pages/**/*"
+    "test": "./node_modules/cypress/bin/cypress  open",
+    "test:e2e": "./node_modules/cypress/bin/cypress  run --reporter json --spec cypress/integration/pages/**/*"
   },
   "author": "",
   "license": "ISC",
