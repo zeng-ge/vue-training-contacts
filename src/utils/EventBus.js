@@ -1,5 +1,5 @@
 import Vue from 'vue'
-const vue = new Vue()
+export const vue = new Vue()
 
 export const addEventListener = (eventType, listener) => {
   vue.$on(eventType, listener)

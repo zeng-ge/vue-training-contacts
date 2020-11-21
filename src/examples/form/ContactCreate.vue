@@ -1,7 +1,7 @@
 <template>
   <form>
     <div>
-      <input v-model.trim="name" />
+      <input v-model.lazy="name" />
     </div>
     <div>
       <select v-model="telphone.type">
@@ -30,21 +30,21 @@ export default {
     alert() {
       alert(
         `${this.name} ${this.telphone.mobile} ${this.gender} ${this.tags} ${this.address}`
-      )
-    }
+      );
+    },
   },
   data() {
     return {
-      name: '',
+      name: "",
       telphone: {
-        type: 'home',
-        mobile: ''
+        type: "home",
+        mobile: "",
       },
-      gender: '男',
+      gender: "男",
       tags: [],
-      address: ''
-    }
-  }
-}
+      address: "",
+    };
+  },
+};
 </script>
 <style lang="less"></style>

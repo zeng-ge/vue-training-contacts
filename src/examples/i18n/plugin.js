@@ -1,5 +1,9 @@
-import { i18nMixin } from './mixin'
-import { translateService } from './service'
+import {
+  i18nMixin
+} from './mixin'
+import {
+  translateService
+} from './service'
 export class I18nPlugin {
   constructor(language, resources) {
     translateService.setLanguage(language)
@@ -9,7 +13,7 @@ export class I18nPlugin {
 
 I18nPlugin.install = Vue => {
   Vue.mixin(i18nMixin)
-  Vue.prototype.$t = function(key) {
+  Vue.prototype.$t = function (key) {
     return translateService.translate(key)
   }
 }

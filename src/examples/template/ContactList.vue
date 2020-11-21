@@ -1,8 +1,8 @@
 <template>
-  <table>
+  <table class="table">
     <thead>
       <tr>
-        <td>姓名</td>
+        <td>姓名<input v-model="user.name" /></td>
         <td>电话</td>
         <td>性别</td>
         <td>标签</td>
@@ -12,18 +12,20 @@
     </thead>
     <tbody>
       <tr
-        v-for="(contact, index) of list"
+        :id="contact.id"
+        v-for="(contact, index) of this.list"
         :key="contact.id"
-        :class="{ active: index % 2 === 0 }"
+        :class="{ event: index % 2 === 0, abc: false }"
+        :style="{ color: index % 2 === 0 ? 'red' : 'black' }"
       >
-        <td>{{ contact.name }}</td>
+        <td v-if="contact.name">{{ contact.name }}</td>
         <td>{{ contact.telphone.mobile }}</td>
         <td>{{ contact.gender }}</td>
         <td>
           <span v-for="tag of contact.tags" :key="tag">{{ tag }}</span>
         </td>
         <td>{{ contact.address }}</td>
-        <td><button @click="onDelete(contact)">删除</button></td>
+        <td><button v-on:click="onDelete(contact, $event)">删除</button></td>
       </tr>
     </tbody>
   </table>
@@ -31,35 +33,56 @@
 
 <script>
 export default {
+  props: {
+    list: {
+      type: Array,
+      default() {
+        return [];
+      },
+    },
+    deleteContact: Function,
+  },
   methods: {
     onDelete(contact) {
-      const index = this.list.indexOf(contact)
-      this.list.splice(index, 1)
-    }
+      // this.deleteContact(contact);
+      // this.$listeners.delete(contact);
+      this.$emit("delete", contact);
+      // const index = this.list.indexOf(contact);
+      // this.list.splice(index, 1);
+    },
+    getBoy() {
+      console.log("get boy");
+      return this.list.filter((item) => item.gender === "男");
+    },
+  },
+  computed: {
+    boy() {
+      console.log("computed get boy");
+      return this.list.filter((item) => item.gender === "男");
+    },
+  },
+  watch: {
+    name: function() {},
+    user: {
+      handler(value, old) {
+        console.log(value, old);
+      },
+      deep: true,
+    },
   },
   data() {
     return {
-      list: [
-        {
-          name: '懂王',
-          telphone: { type: 'home', mobile: 123 },
-          gender: '男',
-          tags: ['中介', '外卖'],
-          address: '漂亮国',
-          id: 1
-        },
-        {
-          name: '雷电法王',
-          telphone: { type: 'home', mobile: '123456789' },
-          gender: '男',
-          tags: ['网隐', '高'],
-          address: '河北',
-          id: 2
-        }
-      ]
-    }
-  }
-}
+      name: "",
+      user: {
+        name: "",
+      },
+    };
+  },
+};
 </script>
 
-<style lang="less"></style>
+<style lang="less">
+.table {
+  background-color: white;
+}
+</style>

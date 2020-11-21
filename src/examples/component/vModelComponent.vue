@@ -1,25 +1,23 @@
 <template>
-    <div v-if="visible">
-        {{name}} <button @click="onClose()">关闭</button>
-    </div>
+  <div v-if="visible">{{ name }} <button @click="onClose()">关闭</button></div>
 </template>
 <script>
 export default {
-    model: {
-        prop: 'visible',
-        event: 'change'
+  model: {
+    prop: "visible",
+    event: "change",
+  },
+  props: {
+    visible: Boolean,
+    name: {
+      type: String,
+      default: () => "moon",
     },
-    props: {
-        visible: Boolean,
-        name: {
-            type: String,
-            default: () => 'moon'
-        }
+  },
+  methods: {
+    onClose() {
+      this.$emit("change", false);
     },
-    methods: {
-        onClose() {
-            this.$emit('change', false)
-        }
-    }
-}
+  },
+};
 </script>
