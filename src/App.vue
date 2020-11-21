@@ -1,17 +1,10 @@
 <template>
   <div class="app">
-    
     <router-view></router-view>
-    <Example v-if="false" />
   </div>
 </template>
 <script>
-import Example from './examples'
-export default {
-  components: {
-    Example
-  }
-}
+export default {};
 </script>
 <style lang="less">
 .app {
