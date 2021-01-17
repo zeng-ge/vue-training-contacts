@@ -4,12 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/cypress/bin/cypress  open",
-    "test:e2e": "./node_modules/cypress/bin/cypress  run --reporter json --spec cypress/integration/pages/**/*"
+    "test:e2e": "./node_modules/cypress/bin/cypress open",
+    "test:e2e:ci": "./node_modules/cypress/bin/cypress  run --reporter json --spec cypress/integration/pages/**/*"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "cypress": "^4.10.0"
+    "cypress": "^4.12.1"
   }
 }
